@@ -6,4 +6,6 @@ public abstract class Jugador {
     private int    posicion;
     private int    cantTurno;
 
+    public abstract int lanzarDados();
+
 }
