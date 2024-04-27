@@ -1,6 +1,6 @@
 package Casilla;
 
-public class Posada extends Posada{
+public class Posada extends Casilla{
     public int OpPosada(){
         return 0;
     }
