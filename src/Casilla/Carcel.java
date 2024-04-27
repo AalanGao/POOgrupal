@@ -1,7 +1,7 @@
 package Casilla;
 
 public class Carcel extends Casilla{
-    private int OpCarcel(){
+    public int OpCarcel(){
         return 0;
     }
 }
