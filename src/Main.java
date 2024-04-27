@@ -1,5 +1,5 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("hoy es sbado 27");
+        System.out.println("Mañana es domingo");
     }
 }
