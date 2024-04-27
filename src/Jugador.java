@@ -5,4 +5,5 @@ public abstract class Jugador {
     private String color;
     private int    posicion;
     private int    cantTurno;
+
 }
