@@ -8,4 +8,19 @@ public abstract class Jugador {
 
     public abstract int lanzarDados();
 
+    public int getCantTurno() {
+        return cantTurno;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setCantTurno(int cantTurno) {
+        this.cantTurno = cantTurno;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    }
 }
