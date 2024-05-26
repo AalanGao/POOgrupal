@@ -7,4 +7,7 @@ public class Casilla {
 
     }
 
+    public TipoCasilla getTipoCasilla() {
+        return tipoCasilla;
+    }
 }

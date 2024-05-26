@@ -27,20 +27,27 @@ public class JuegoOca {
         //Mientra no hay jugadores se sigue jugando
         int jugadorAct = 0;
         while (!hayGanador){
-            //verifica si tiene turno, y recorre por todos los jugadores
-            while (this.validarTurno(jugadorAct) && jugadorAct < jugadores.length){
+            //verifica si tiene turno, juega hasta que se quede sin turno
+            while (this.validarTurno(jugadorAct)){
                 Jugador jugador = jugadores[jugadorAct];
                 int posDestino = jugador.getPosicion() + jugador.lanzarDados();
                 jugador.setPosicion(posDestino);
                 this.tablero.getCasillas()[posDestino].activarEfecto(jugador,this.getTablero());
+                jugador.setCantTurno(jugador.getCantTurno()-1);
+            }
+
+            jugadores[jugadorAct].setCantTurno(jugadores[jugadorAct].getCantTurno()+1);
+
+            if(jugadorAct == jugadores.length-1){
+                jugadorAct = 0;
+            }else {
                 jugadorAct++;
             }
-            jugadorAct = 0;
         }
     }
 
     private boolean validarTurno(int pos){
-        return jugadores[pos].getCantTurno() >= 0;
+        return jugadores[pos].getCantTurno() > 0;
     }
 
     public Tablero getTablero() {
