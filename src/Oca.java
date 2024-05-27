@@ -1,4 +1,4 @@
-public class Oca extends DestinoDirecto {
+public class Oca extends Casilla {
 
 
     public Oca(int posicion, TipoCasilla tipoCasilla) {
