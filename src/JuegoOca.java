@@ -2,10 +2,12 @@ import java.util.Random;
 
 public class JuegoOca {
 
-    private static JuegoOca instance;
-    private Jugador[]       jugadores;
-    private Tablero         tablero;
-    private boolean        hayGanador;
+    private static JuegoOca  instance;
+    private final static int cantJugadores = 4;
+    private final static int cantCasillas  = 63;
+    private Jugador[]        jugadores;
+    private Tablero          tablero;
+    private boolean          hayGanador;
 
     private JuegoOca(){
 
@@ -18,13 +20,21 @@ public class JuegoOca {
         return JuegoOca.instance;
     }
 
+    //cantidad de persona que jueguen
     private Jugador[] generarJugadores(int cantHumanos){
         Jugador[] jugadores = new Jugador[4];
+        for (int i = 0; i < cantJugadores; i++) {
+            if (i < cantHumanos){
+                jugadores[i] = new Humano(1,"negro","jugador",0);
+            }else {
+                jugadores[i] = new IA(1,"negro","IA",0);
+            }
+        }
         return jugadores;
     }
 
     public void juego(){
-        //Mientra no hay jugadores se sigue jugando
+        //Mientra no haya ganador se sigue jugando
         int jugadorAct = 0;
         while (!hayGanador){
             //verifica si tiene turno, juega hasta que se quede sin turno
@@ -53,4 +63,6 @@ public class JuegoOca {
     public Tablero getTablero() {
         return tablero;
     }
+
+
 }
