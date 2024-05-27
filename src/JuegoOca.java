@@ -10,7 +10,8 @@ public class JuegoOca {
     private boolean          hayGanador;
 
     private JuegoOca(){
-
+        this.generarJugadores(1);
+        this.tablero = new Tablero(cantCasillas);
     }
 
     public static JuegoOca getInstance(){
@@ -53,6 +54,8 @@ public class JuegoOca {
             }else {
                 jugadorAct++;
             }
+
+            this.estadoDelJuego();
         }
     }
 
@@ -64,5 +67,9 @@ public class JuegoOca {
         return tablero;
     }
 
-
+    public void estadoDelJuego(){
+        for (int i = 0; i < jugadores.length; i++) {
+            System.out.println(jugadores[i].getNombre() + " Posicion:" + jugadores[i].getPosicion());
+        }
+    }
 }

@@ -1,5 +1,10 @@
 public class Oca extends DestinoDirecto {
 
+
+    public Oca(int posicion, TipoCasilla tipoCasilla) {
+        super(posicion, tipoCasilla);
+    }
+
     @Override
     public void activarEfecto(Jugador jugador, Tablero tablero) {
         jugador.setPosicion(this.proximoOca(jugador, tablero));
