@@ -13,7 +13,7 @@ public class Oca extends Casilla {
     private int proximoOca(Jugador jugador, Tablero tablero){
         boolean encontro = false;
         int i = jugador.getPosicion();
-        while (!encontro && i < tablero.getCasillas().length){
+        while (!encontro && i < tablero.getCasillas().length-1){
             i++;
             if(tablero.getCasillas()[i].getTipoCasilla().equals(TipoCasilla.OCA)){
                 encontro = true;

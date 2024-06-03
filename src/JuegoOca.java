@@ -4,7 +4,7 @@ public class JuegoOca {
 
     private static JuegoOca  instance;
     private final static int cantJugadores = 4;
-    private final static int cantCasillas  = 62;
+    private final static int cantCasillas  = 63;
     private Jugador[]        jugadores;
     private Tablero          tablero;
     private boolean          hayGanador;
@@ -42,9 +42,9 @@ public class JuegoOca {
             while (this.validarTurno(jugadorAct)){
                 Jugador jugador = jugadores[jugadorAct];
                 int posDestino = jugador.getPosicion() + jugador.lanzarDados();
-                if(posDestino > cantCasillas){
-                    posDestino =  cantCasillas + (cantCasillas - posDestino);
-                } else if (posDestino == cantCasillas) {
+                if(posDestino >= cantCasillas){
+                    posDestino =  cantCasillas-1 + (cantCasillas-1 - posDestino);
+                } else if (posDestino == cantCasillas-1) {
                     hayGanador = true;
                 }
                 jugador.setPosicion(posDestino);
