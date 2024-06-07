@@ -1,3 +1,5 @@
+package model;
+
 public class IA extends Jugador{
 
 

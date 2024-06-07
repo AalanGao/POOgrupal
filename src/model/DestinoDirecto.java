@@ -1,3 +1,5 @@
+package model;
+
 public class DestinoDirecto extends Casilla{
     private int destino;
 

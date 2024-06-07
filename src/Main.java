@@ -1,8 +1,11 @@
+import controller.JuegoOcaController;
+import model.JuegoOca;
+
 public class Main {
     public static void main(String[] args) {
 
-        JuegoOca oca = JuegoOca.getInstance();
+        JuegoOcaController oca = JuegoOcaController.getInstance();
 
-        oca.juego();
+        oca.IniciarJuego();
     }
 }

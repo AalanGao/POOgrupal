@@ -1,4 +1,4 @@
-import java.util.Random;
+package model;
 
 public class JuegoOca {
 
@@ -28,7 +28,7 @@ public class JuegoOca {
             if (i < cantHumanos){
                 jugadores[i] = new Humano(1,"negro","jugador",0);
             }else {
-                jugadores[i] = new IA(1,"negro","IA",0);
+                jugadores[i] = new IA(1,"negro","model.IA",0);
             }
         }
     }

@@ -1,3 +1,5 @@
+package model;
+
 public class CambioTurno extends Casilla {
     private int cantidad;
 
