@@ -1,6 +1,6 @@
 package model;
 
-public class JuegoOca {
+public class JuegoOca implements Observador{
 
     private static JuegoOca  instance;
     private final static int cantJugadores = 4;
@@ -28,7 +28,7 @@ public class JuegoOca {
             if (i < cantHumanos){
                 jugadores[i] = new Humano(1,"negro","jugador",0);
             }else {
-                jugadores[i] = new IA(1,"negro","model.IA",0);
+                jugadores[i] = new IA(1,"negro","IA " + i,0);
             }
         }
     }
@@ -41,7 +41,8 @@ public class JuegoOca {
             //verifica si tiene turno, juega hasta que se quede sin turno
             while (this.validarTurno(jugadorAct)){
                 Jugador jugador = jugadores[jugadorAct];
-                int posDestino = jugador.getPosicion() + jugador.lanzarDados();
+                int posAnterior = jugador.getPosicion();
+                int posDestino =  posAnterior + jugador.lanzarDados();
                 if(posDestino >= cantCasillas){
                     posDestino =  cantCasillas-1 + (cantCasillas-1 - posDestino);
                 } else if (posDestino == cantCasillas-1) {
@@ -50,17 +51,24 @@ public class JuegoOca {
                 jugador.setPosicion(posDestino);
                 this.tablero.getCasillas()[posDestino].activarEfecto(jugador,this.getTablero());
                 jugador.setCantTurno(jugador.getCantTurno()-1);
+
+                if(posAnterior < 31 && posDestino > 31){
+                    this.notificar();
+                }
+
+                System.out.println(jugador.getNombre() + " Posicion:" + jugador.getPosicion());
             }
 
             jugadores[jugadorAct].setCantTurno(jugadores[jugadorAct].getCantTurno()+1);
 
             if(jugadorAct == jugadores.length-1){
                 jugadorAct = 0;
+                System.out.println("Siguiente Ronda");
             }else {
                 jugadorAct++;
             }
 
-            this.estadoDelJuego();
+            //this.estadoDelJuego();
         }
     }
 
@@ -75,6 +83,15 @@ public class JuegoOca {
     public void estadoDelJuego(){
         for (int i = 0; i < jugadores.length; i++) {
             System.out.println(jugadores[i].getNombre() + " Posicion:" + jugadores[i].getPosicion());
+        }
+    }
+
+    @Override
+    public void notificar() {
+        for (int i = 0; i < jugadores.length; i++) {
+            if (this.jugadores[i].getPosicion() == 31){
+                this.jugadores[i].update();
+            }
         }
     }
 }

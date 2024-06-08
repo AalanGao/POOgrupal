@@ -6,6 +6,6 @@ public class Pozo extends Casilla {
     }
 
     public void activarEfecto(Jugador jugador, Tablero tablero){
-        jugador.setCantTurno(Integer.MIN_VALUE);
+        jugador.setCantTurno(-999);
     }
 }

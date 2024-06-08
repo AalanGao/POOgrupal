@@ -1,12 +1,15 @@
 package model;
 
-public abstract class Jugador {
+import java.util.Random;
+
+public abstract class Jugador implements Observado{
 
     //private int    id;
     private String nombre;
     private String color;
     private int    posicion;
     private int    cantTurno;
+    public static Random random = new Random();
 
     public Jugador(int cantTurno, String color, String nombre, int posicion) {
         this.cantTurno = cantTurno;
@@ -15,6 +18,9 @@ public abstract class Jugador {
         this.posicion = posicion;
     }
 
+    public void update(){
+        this.setCantTurno(1);
+    }
     public abstract int lanzarDados();
 
     public int getCantTurno() {
