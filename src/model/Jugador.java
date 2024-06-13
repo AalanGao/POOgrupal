@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-public abstract class Jugador implements Observado{
+public abstract class Jugador implements Observador{
 
     //private int    id;
     private String nombre;

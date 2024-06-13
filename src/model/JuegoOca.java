@@ -1,6 +1,6 @@
 package model;
 
-public class JuegoOca implements Observador{
+public class JuegoOca implements Observado{
 
     private static JuegoOca  instance;
     private final static int cantJugadores = 4;
