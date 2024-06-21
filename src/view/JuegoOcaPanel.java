@@ -20,7 +20,7 @@ public class JuegoOcaPanel extends JPanel {
     private int[] posicionesJugadores; // Array para las posiciones de los jugadores
 
     public JuegoOcaPanel() {
-        setPreferredSize(new Dimension(800, 600)); // Tamaño del panel
+        setPreferredSize(new Dimension(600, 600)); // Tamaño del panel
         setBackground(Color.WHITE);
         posicionesJugadores = new int[4]; // Inicializar array para 4 jugadores
     }

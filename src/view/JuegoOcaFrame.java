@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class JuegoOcaFrame extends JFrame {
 
-    private static final int ANCHO_JUEGO = 1000;
+    private static final int ANCHO_JUEGO = 850;
     private static final int ALTO_JUEGO = 700;
 
     private JuegoOcaPanel juegoPanel;
