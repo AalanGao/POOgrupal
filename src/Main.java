@@ -6,6 +6,6 @@ public class Main {
 
         JuegoOcaController oca = JuegoOcaController.getInstance();
 
-        oca.IniciarJuego();
+        oca.iniciarJuego2();
     }
 }

@@ -1,12 +1,13 @@
 package model;
 
 public enum TipoCasilla {
+    INICIO,
     OCA,
     PUENTE,
     POSADA,
     POZO,
     CALAVERA,
-    VOLVERLANZARDADOS,
+    DADOS,
     LABERINTO,
     CARCEL,
     FINAL,
