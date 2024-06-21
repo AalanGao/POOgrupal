@@ -94,11 +94,11 @@ public class JuegoOca implements Observado{
                     int nuevaPosicion = posAnterior + i * direccion;
                     jugador.setPosicion(nuevaPosicion);
 
-                    // Actualizar la interfaz de usuario en el EDT
+                    // Actualizar la interfaz de usuario
                         juegoOcaFrame.getJuegoPanel().setPosicionesJugadores(this.estadoJuego());
 
                     try {
-                        Thread.sleep(500); // Esperar 0.5 segundos
+                        Thread.sleep(300); // Esperar 0.5 segundos
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
@@ -111,7 +111,11 @@ public class JuegoOca implements Observado{
                     this.notificar();
                 }
             }
-            //juegoOcaFrame.getJuegoPanel().setTablero(this.getTablero());
+
+            if (hayGanador) {
+                juegoOcaFrame.mostrarDialogoGanador(jugadores[jugadorAct].getNombre());
+            }
+
             juegoOcaFrame.getJuegoPanel().setPosicionesJugadores(this.estadoJuego());
 
             jugadores[jugadorAct].setCantTurno(jugadores[jugadorAct].getCantTurno()+1);

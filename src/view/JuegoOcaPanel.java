@@ -3,6 +3,7 @@ package view;
 import model.Casilla;
 import model.Jugador;
 import model.Tablero;
+import model.TipoCasilla;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +62,10 @@ public class JuegoOcaPanel extends JPanel {
                 g.drawString(Integer.toString(i), x + 5, y + 15);
 
                 // Dibujar el tipo de casilla (puedes modificar esto según el tipo de casilla)
-                g.drawString(casillas[i].getTipoCasilla().toString(), x + 5, y + 35);
+                if(casillas[i].getTipoCasilla() != TipoCasilla.COMUN){
+                    g.drawString(casillas[i].getTipoCasilla().toString(), x + 5, y + 35);
+                }
+
             }
 
             // Dibujar los jugadores en sus posiciones

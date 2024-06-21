@@ -30,6 +30,13 @@ public class JuegoOcaFrame extends JFrame {
         setVisible(true);
     }
 
+    public void mostrarDialogoGanador(String nombreJugador) {
+        JOptionPane.showMessageDialog(this,
+                "¡El jugador " + nombreJugador + " ha ganado!",
+                "¡Fin del juego!",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public JuegoOcaPanel getJuegoPanel() {
         return juegoPanel;
     }

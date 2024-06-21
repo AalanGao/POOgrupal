@@ -12,8 +12,8 @@ public class Humano extends Jugador{
 
     @Override
     public int lanzarDados() {
-        return Jugador.random.nextInt(6)+1;
-        //return 31;
+        //return Jugador.random.nextInt(6)+1;
+        return 6;
     }
 
 }
