@@ -11,7 +11,6 @@ public class Casilla {
     }
 
     public void activarEfecto(Jugador jugador, Tablero tablero){
-
     }
 
     public TipoCasilla getTipoCasilla() {

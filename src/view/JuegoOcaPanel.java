@@ -1,7 +1,6 @@
 package view;
 
 import model.Casilla;
-import model.Jugador;
 import model.Tablero;
 import model.TipoCasilla;
 
