@@ -4,7 +4,6 @@ import java.util.Random;
 
 public abstract class Jugador implements Observador{
 
-    //private int    id;
     private String nombre;
     private String color;
     private int    posicion;
@@ -39,19 +38,9 @@ public abstract class Jugador implements Observador{
         this.posicion = posicion;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 }

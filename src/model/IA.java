@@ -1,6 +1,6 @@
 package model;
 
-public class IA extends Jugador{
+public final class IA extends Jugador{
 
     public IA(int cantTurno, String color, String nombre, int posicion) {
         super(cantTurno, color, nombre, posicion);

@@ -1,7 +1,6 @@
 package model;
 
-public class Oca extends Casilla {
-
+public final class Oca extends Casilla {
 
     public Oca(int posicion, TipoCasilla tipoCasilla) {
         super(posicion, tipoCasilla);
@@ -24,5 +23,4 @@ public class Oca extends Casilla {
 
         return encontro ? i : jugador.getPosicion();
     }
-
 }

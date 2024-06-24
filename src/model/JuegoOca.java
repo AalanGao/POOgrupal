@@ -1,10 +1,8 @@
 package model;
-
 import view.JuegoOcaFrame;
-
 import javax.swing.*;
 
-public class JuegoOca implements Observado{
+public final class JuegoOca implements Observado{
 
     private static JuegoOca  instance;
     private final static int cantJugadores = 4;
@@ -12,19 +10,21 @@ public class JuegoOca implements Observado{
     private Jugador[]        jugadores;
     private Tablero          tablero;
     private boolean          hayGanador;
-    private final JuegoOcaFrame juegoOcaFrame;
+    private JuegoOcaFrame juegoOcaFrame;
     private boolean jugador0HaLanzadoDados;
 
     private JuegoOca(){
-        this.juegoOcaFrame = new JuegoOcaFrame();
         this.generarJugadores(1);
         this.tablero = new Tablero(cantCasillas);
+    }
 
-        juegoOcaFrame.getBtnLanzarDados().addActionListener(e -> {
+    public void setViewOca(JuegoOcaFrame frame){
+        this.juegoOcaFrame = frame;
+        //modifica bandera para desactivar boton y que el juego siga
+        this.juegoOcaFrame.getBtnLanzarDados().addActionListener(e -> {
             this.jugador0HaLanzadoDados = true;
         });
     }
-
     public static JuegoOca getInstance(){
         if(JuegoOca.instance == null){
             JuegoOca.instance = new JuegoOca();
@@ -52,30 +52,12 @@ public class JuegoOca implements Observado{
         while (!hayGanador){
             //verifica si tiene turno, juega hasta que se quede sin turno
             while (this.validarTurno(jugadorAct)){
+
                 Jugador jugador = jugadores[jugadorAct];
                 if (jugadorAct == 0) {
-                    // Habilitar el botón para lanzar dados
-                    SwingUtilities.invokeLater(() -> {
-                        juegoOcaFrame.getBtnLanzarDados().setEnabled(true);
-                    });
-
-                    // Esperar hasta que se haga clic en el botón
-                    while (!jugador0HaLanzadoDados) {
-                        try {
-                            Thread.sleep(100); // Esperar 1 segundo antes de verificar de nuevo
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                        }
-                    }
-
-                    // Desactivar el botón después de que se haya lanzado los dados
-                    SwingUtilities.invokeLater(() -> {
-                        juegoOcaFrame.getBtnLanzarDados().setEnabled(false);
-                    });
-
-                    // Reiniciar la bandera para el siguiente turno del jugador 0
-                    jugador0HaLanzadoDados = false;
+                    this.activarBotonLanzar();
                 }
+
                 int posAnterior = jugador.getPosicion();
                 int posDestino =  posAnterior + jugador.lanzarDados();
                 if(posDestino >= cantCasillas){
@@ -84,23 +66,10 @@ public class JuegoOca implements Observado{
                     hayGanador = true;
                 }
 
-                int pasos = Math.abs(posDestino - posAnterior);
-                int direccion = (posDestino > posAnterior) ? 1 : -1;
+                this.animacionMov(posDestino, posAnterior, jugador);
 
-                for (int i = 0; i <= pasos; i++) {
-                    int nuevaPosicion = posAnterior + i * direccion;
-                    jugador.setPosicion(nuevaPosicion);
-
-                    // Actualizar la interfaz de usuario
-                        juegoOcaFrame.getJuegoPanel().setPosicionesJugadores(this.estadoJuego());
-
-                    try {
-                        Thread.sleep(300); // Esperar 0.5 segundos
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                    }
-                }
                 jugador.setPosicion(posDestino);
+
                 this.tablero.getCasillas()[posDestino].activarEfecto(jugador,this.getTablero());
                 jugador.setCantTurno(jugador.getCantTurno()-1);
 
@@ -109,12 +78,12 @@ public class JuegoOca implements Observado{
                 }
             }
 
+            // pinta de nuevo en caso de activarse algun efecto
+            juegoOcaFrame.getJuegoPanel().setPosicionesJugadores(this.estadoJuego());
+
             if (hayGanador) {
                 juegoOcaFrame.mostrarDialogoGanador(jugadores[jugadorAct].getNombre());
             }
-
-            juegoOcaFrame.getJuegoPanel().setPosicionesJugadores(this.estadoJuego());
-
             jugadores[jugadorAct].setCantTurno(jugadores[jugadorAct].getCantTurno()+1);
 
             if(jugadorAct == jugadores.length-1){
@@ -123,8 +92,9 @@ public class JuegoOca implements Observado{
                 jugadorAct++;
             }
 
+            //Espera de tiempo entre turno
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -155,5 +125,49 @@ public class JuegoOca implements Observado{
             estado[i] = this.jugadores[i].getPosicion();
         }
         return estado;
+    }
+
+    private void activarBotonLanzar(){
+        // Habilitar el botón para lanzar dados
+        SwingUtilities.invokeLater(() -> {
+            juegoOcaFrame.getBtnLanzarDados().setEnabled(true);
+        });
+
+        // Esperar hasta que se haga clic en el botón
+        while (!jugador0HaLanzadoDados) {
+            try {
+                Thread.sleep(100); // Esperar antes de verificar de nuevo
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+
+        // Desactivar el botón después de que se haya lanzado los dados
+        SwingUtilities.invokeLater(() -> {
+            juegoOcaFrame.getBtnLanzarDados().setEnabled(false);
+        });
+
+        // Reiniciar la bandera para el siguiente turno del jugador 0
+        jugador0HaLanzadoDados = false;
+    }
+
+    private void animacionMov(int posDestino, int posAnterior, Jugador jugador){
+
+        int pasos = Math.abs(posDestino - posAnterior);
+        int direccion = (posDestino > posAnterior) ? 1 : -1;
+
+        for (int i = 0; i <= pasos; i++) {
+            int nuevaPosicion = posAnterior + i * direccion;
+            jugador.setPosicion(nuevaPosicion);
+
+            // Actualizar la interfaz de usuario
+            juegoOcaFrame.getJuegoPanel().setPosicionesJugadores(this.estadoJuego());
+
+            try {
+                Thread.sleep(300); // Esperar 0.5 segundos
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class JuegoOcaPanel extends JPanel {
+public final class JuegoOcaPanel extends JPanel {
 
     private static final int ANCHO_CASILLA = 80;
     private static final int ALTO_CASILLA = 80;

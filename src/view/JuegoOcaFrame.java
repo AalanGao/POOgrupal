@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class JuegoOcaFrame extends JFrame {
+public final class JuegoOcaFrame extends JFrame {
 
     private static final int ANCHO_JUEGO = 850;
     private static final int ALTO_JUEGO = 700;

@@ -1,7 +1,7 @@
 package model;
 
-public class CambioTurno extends Casilla {
-    private int cantidad;
+public final class CambioTurno extends Casilla {
+    private final int cantidad;
 
     public CambioTurno(int posicion, TipoCasilla tipoCasilla, int cant) {
         super(posicion, tipoCasilla);

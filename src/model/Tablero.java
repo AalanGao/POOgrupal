@@ -1,18 +1,19 @@
 package model;
 
-public class Tablero {
+public final class Tablero {
+
     private Casilla[] casillas;
 
     public Tablero(int cant) {
+
         casillas = new Casilla[cant];
+        int[] arrayOca= {5,9,14,18,23,27,32,36,41,45,50,54,59};
+
         for (int i = 0; i < cant; i++) {
             casillas[i] = new Casilla(i, TipoCasilla.COMUN);
         }
-        this.casillas[5] = new Oca(5, TipoCasilla.OCA);
 
-        int[] array= {5,9,14,18,23,27,32,36,41,45,50,54,59};
-
-        for (int j : array) {
+        for (int j : arrayOca) {
             this.casillas[j] = new Oca(j, TipoCasilla.OCA);
         }
 
@@ -29,7 +30,6 @@ public class Tablero {
         this.casillas[62] = new Casilla(0, TipoCasilla.FINAL);
 
     }
-
 
     public Casilla[] getCasillas() {
         return casillas;
